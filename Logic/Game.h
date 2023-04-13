@@ -3,6 +3,7 @@
 
 #include "Hand.h"
 #include "Card.h"
+
 #include <array>
 #include <vector>
 #include <bitset>

@@ -1,5 +1,15 @@
 # Whist
 
+## Installation
+
+The game will hopefully be available on the Arch user repository (AUR) soon.
+
+### From Source
+
+- Clone the git repository to your PC.
+- run `make terminal` in the terminal
+- Run `Build/whist`.
+
 ## Game instructions
 
 Whist is a card game about not just being to play what you got in the best way but also expecting it. The game enables you to make the most out of what you got regardless of it being "weak" or "strong".
@@ -68,10 +78,10 @@ If the better didn't take at all, they earn their bonus as points. If they did, 
 ### Game Walkthrough
 
 (The hands were dealt randomally and I am honestly shocked by how good player 2's hand is.)\
-Player 1's hand: `♦2 ♦7 ♦9 ♦A ♣2 ♣5 ♣6 ♣J ♥4 ♥9 ♠3 ♠Q ♠A`\
-Player 2's hand: `♦3 ♦4 ♣3 ♣Q ♣K ♥5 ♥10 ♥J ♥Q ♥K ♥A ♠4 ♠7`\
-Player 3's hand: `♦5 ♦8 ♦10 ♦J ♦K ♣8 ♣9 ♥2 ♥3 ♥7 ♠2 ♠9 ♠K`\
-Player 4's hand: `♦6 ♦Q ♣4 ♣7 ♣10 ♣A ♥6 ♥8 ♠5 ♠6 ♠8 ♠10 ♠J`\
+Player 1's hand: ♦2 ♦7 ♦9 ♦A ♣2 ♣5 ♣6 ♣J ♥4 ♥9 ♠3 ♠Q ♠A\
+Player 2's hand: ♦3 ♦4 ♣3 ♣Q ♣K ♥5 ♥10 ♥J ♥Q ♥K ♥A ♠4 ♠7\
+Player 3's hand: ♦5 ♦8 ♦10 ♦J ♦K ♣8 ♣9 ♥2 ♥3 ♥7 ♠2 ♠9 ♠K\
+Player 4's hand: ♦6 ♦Q ♣4 ♣7 ♣10 ♣A ♥6 ♥8 ♠5 ♠6 ♠8 ♠10 ♠J
 
 #### Initial Bets
 

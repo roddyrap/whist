@@ -17,7 +17,7 @@ namespace Whist::Terminal
         // Clear terminal.
         std::wcout << L"\033[2J";
 
-        // Move cursor to beggining.
+        // Move cursor to beginning.
         std::wcout << L"\033[0;0H";
     }
 

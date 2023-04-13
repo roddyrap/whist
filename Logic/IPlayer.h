@@ -12,6 +12,6 @@ namespace Whist::Logic
         virtual bool PlaceSecondaryBet() = 0;
         virtual bool PlaceCard() = 0;
     };
-}
+} // namespace Whist::Logic
 
 #endif // WHIST_LOGIC_I_PLAYER_H
