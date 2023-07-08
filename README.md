@@ -7,8 +7,11 @@ The game will hopefully be available on the Arch user repository (AUR) soon.
 ### From Source
 
 - Clone the git repository to your PC.
-- run `make terminal` in the terminal
-- Run `Build/whist`.
+- Run `mkdir -p build/`
+- Enter the build directory.
+- Run `cmake ..`
+- Run `cmake --build .`
+- The terminal program will be available at `build/Terminal/WhistTerminal`
 
 ## Game instructions
 

@@ -3,17 +3,32 @@
 #include <Logic/IPlayer.h>
 #include <Logic/AIPlayer.h>
 
+#include "WhistConfig.h"
+
 #include "TerminalUtils.h"
 #include "TerminalPlayer.h"
 
 #include <iostream>
 #include <memory>
+#include <unistd.h>
 
 using namespace Whist::Terminal;
 using namespace Whist::Logic;
 
 int main(int argc, char** argv)
 {
+    int opt{0};
+    while ((opt = getopt(argc, argv, "h")) != -1)
+    {
+        switch(opt)
+        {
+        case 'h':
+            std::cout << "Whist Version: " << WHIST_VERSION_MAJOR << '.' << WHIST_VERSION_MINOR << std::endl <<
+                         "Version Type: " << BUILD_TYPE << std::endl;
+            exit(EXIT_SUCCESS);
+        }
+    }
+
     // Set terminal to print Unicode characters (Mostly card suit symbols).
     setlocale( LC_ALL, "en_US.utf8" );
 
