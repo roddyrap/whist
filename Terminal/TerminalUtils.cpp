@@ -21,7 +21,7 @@ namespace Whist::Terminal
         std::wcout << L"\033[0;0H";
     }
 
-    std::wstring GetInitialBets(Game whistGame)
+    std::wstring GetInitialBets(Game& whistGame)
     {
         std::wstringstream stringStream{};
         auto playerBets{whistGame.GetBets()};
@@ -55,7 +55,7 @@ namespace Whist::Terminal
         return stringStream.str();
     }
 
-    std::wstring GetTakes(Game whistGame)
+    std::wstring GetTakes(Game& whistGame)
     {
         std::array<uint8_t, NUM_PLAYERS> playerTakes{whistGame.GetTakes()};
         std::array<Card, NUM_PLAYERS> playerBets{whistGame.GetBets()};
@@ -231,7 +231,7 @@ namespace Whist::Terminal
         return true;
     }
 
-    void PrintEndScreen(Game whistGame)
+    void PrintEndScreen(Game& whistGame)
     {
         std::wcout << "Game State: " << GameStateToWString(whistGame.GetGameState()) << std::endl;
         std::wcout << "Ruling Type: " << CardSuitToWString(whistGame.GetRulingType()) << std::endl;
@@ -251,7 +251,7 @@ namespace Whist::Terminal
         std::wcout << std::endl;
     }
 
-    void PrintPlayersStatus(Game whistGame)
+    void PrintPlayersStatus(Game& whistGame)
     {
         auto& takes{whistGame.GetTakes()};
         auto& bets{whistGame.GetBets()};

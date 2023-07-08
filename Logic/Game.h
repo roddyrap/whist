@@ -29,10 +29,12 @@ namespace Whist::Logic
     class Game
     {
     public:
+        virtual ~Game() = default;
+
         /**
          * Deals cards to the hands in the game.
          */
-        void DealCards();
+        virtual void DealCards();
 
         /**
          * Places a bet for the player, works for both initial & secondary
@@ -43,7 +45,7 @@ namespace Whist::Logic
          *                    valid in initial betting round.
          * @return            Whether the operation was completed successfully.
          */
-        int8_t PlaceBet(uint8_t playerIndex, Card playerBet);
+        virtual int8_t PlaceBet(uint8_t playerIndex, Card playerBet);
 
         /**
          * Simulates a player taking their turn in a betting round. Will allow
@@ -54,7 +56,7 @@ namespace Whist::Logic
          * @param cardPlaced  The card to play for the player.
          * @return            Whether the operation was completed successfully.
          */
-        bool PlaceCard(uint8_t playerIndex, Card cardPlaced);
+        virtual bool PlaceCard(uint8_t playerIndex, Card cardPlaced);
 
         /**
          * A helper function for solving the invalid game state.
@@ -63,7 +65,7 @@ namespace Whist::Logic
          *
          * Will only work if the game is invalid.
         */
-        void HandleInvalid();
+        virtual void HandleInvalid();
 
         const Hand& GetPlayer(uint8_t playerIndex) const;
         Hand& GetMutablePlayer(uint8_t playerIndex);
@@ -127,8 +129,10 @@ namespace Whist::Logic
         */
         uint8_t GetWinnderIndex() const;
 
+    protected:
         std::array<Hand, NUM_PLAYERS> m_playerHands{};
 
+    private:
         // Use card data type to save bet type and bet value.
         std::array<Card, NUM_PLAYERS> m_playerBets{};
         std::array<uint8_t, NUM_PLAYERS> m_playerTakes{0};

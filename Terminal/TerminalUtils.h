@@ -20,9 +20,9 @@ namespace Whist::Terminal
     */
     std::wstring GameStateToWString(Logic::eGameState gameState);
 
-    std::wstring GetInitialBets(Logic::Game whistGame);
+    std::wstring GetInitialBets(Logic::Game& whistGame);
 
-    std::wstring GetTakes(Logic::Game whistGame);
+    std::wstring GetTakes(Logic::Game& whistGame);
 
     bool GetCardInput(Logic::Card& o_card);
 
@@ -34,13 +34,13 @@ namespace Whist::Terminal
      * 
      * @param whistGame The game object to take player data from.
     */
-    void PrintPlayersStatus(Logic::Game whistGame);
+    void PrintPlayersStatus(Logic::Game& whistGame);
 
     /**
      * Print the scores and status of each player. This is a large print
      * that is supposed to give information about a recently finished game.
     */
-    void PrintEndScreen(Logic::Game whistGame);
+    void PrintEndScreen(Logic::Game& whistGame);
 
     /**
      * Get the unicode characters of the card suits, with color support

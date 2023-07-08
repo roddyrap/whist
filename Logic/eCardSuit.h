@@ -3,7 +3,7 @@
 
 namespace Whist::Logic
 {
-    // Ording is according to power.
+    // Order is according to power.
     enum class eCardSuit
     {
         CLUBS,

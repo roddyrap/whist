@@ -56,7 +56,7 @@ namespace Whist::Logic
                 {
                     betState.second += cardTakeProbability <= cardNoRulerPower;
                 }
-                else if (betState.first == eCardSuit::NO_TYPE)
+                else if (betState.first == card.m_type)
                 {
                     betState.second += cardTakeProbability <= cardRulingPower;
                 }

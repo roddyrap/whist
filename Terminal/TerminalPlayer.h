@@ -17,6 +17,9 @@ namespace Whist::Terminal
         void PrintPlayerCards();
         void PrintTurn();
 
+        /**
+         * @see IPlayer.h
+        */
         virtual bool PlaceInitialBet() override;
         virtual bool PlaceSecondaryBet() override;
         virtual bool PlaceCard() override;

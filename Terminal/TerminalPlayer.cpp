@@ -40,8 +40,7 @@ namespace Whist::Terminal
                     std::wcout << TerminalCard{card} << ", ";
                 }
 
-                std::wcout << std::endl;
-                std::wcout << std::endl;
+                std::wcout << std::endl << std::endl;
             }
 
             std::array<Card, NUM_PLAYERS> currentRound{m_game.GetCurrentRound()};
