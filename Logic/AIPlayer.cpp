@@ -56,7 +56,7 @@ namespace Whist::Logic
                 {
                     betState.second += cardTakeProbability <= cardNoRulerPower;
                 }
-                else if (betState.first == card.m_type)
+                else if (betState.first == card.m_suit)
                 {
                     betState.second += cardTakeProbability <= cardRulingPower;
                 }
@@ -142,7 +142,7 @@ namespace Whist::Logic
         std::map<eCardSuit, int8_t> cardCounts{};
         for (const auto& currentCard : m_hand.GetCards())
         {
-            eCardSuit cardSuit{currentCard.m_type};
+            eCardSuit cardSuit{currentCard.m_suit};
             if (cardCounts.contains(cardSuit))
             {
                 cardCounts[cardSuit] += 1;

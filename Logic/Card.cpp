@@ -3,14 +3,14 @@
 
 namespace Whist::Logic
 {
-    Card::Card(eCardSuit type, card_number_t number) : m_type{type}, m_number{number}
+    Card::Card(eCardSuit type, card_number_t number) : m_suit{type}, m_number{number}
     {}
 
     int Card::operator<=>(const Card& other) const
     {
         if (this->m_number == other.m_number)
         {
-            return this->m_type == other.m_type ? 0 : (this->m_type > other.m_type ? 1 : -1);
+            return this->m_suit == other.m_suit ? 0 : (this->m_suit > other.m_suit ? 1 : -1);
         }
 
         return this->m_number > other.m_number ? 1 : -1;
@@ -18,6 +18,6 @@ namespace Whist::Logic
 
     bool Card::operator==(const Card& other) const
     {
-        return this->m_number == other.m_number && this->m_type == other.m_type;
+        return this->m_number == other.m_number && this->m_suit == other.m_suit;
     }
 }

@@ -102,7 +102,7 @@ namespace Whist::Logic
                     }
                 }
 
-                m_rulingType = m_playerBets[m_rulingPlayer].m_type;
+                m_rulingType = m_playerBets[m_rulingPlayer].m_suit;
                 m_startingPlayerIndex = m_rulingPlayer;
 
                 m_playedPlayers.reset();
@@ -140,9 +140,9 @@ namespace Whist::Logic
 
         if (playerIndex == m_startingPlayerIndex)
         {
-            m_currentRoundType = cardPlaced.m_type;
+            m_currentRoundType = cardPlaced.m_suit;
         }
-        else if (cardPlaced.m_type != m_currentRoundType && playerHand.HasType(m_currentRoundType))
+        else if (cardPlaced.m_suit != m_currentRoundType && playerHand.HasType(m_currentRoundType))
         {
             return false;
         }
@@ -276,7 +276,7 @@ namespace Whist::Logic
         {
             const Card& playerCard{m_currentRound[playerIndex]};
 
-            if (playerCard.m_type == winningPlayerCard.m_type)
+            if (playerCard.m_suit == winningPlayerCard.m_suit)
             {
                 if (playerCard.m_number > winningPlayerCard.m_number)
                 {
@@ -284,7 +284,7 @@ namespace Whist::Logic
                     winningPlayerCard = playerCard;
                 }
             }
-            else if (playerCard.m_type == m_rulingType)
+            else if (playerCard.m_suit == m_rulingType)
             {
                 winningPlayerIndex = playerIndex;
                 winningPlayerCard = playerCard;

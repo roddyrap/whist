@@ -23,7 +23,7 @@ namespace Whist::Logic
         int operator<=>(const Card& other) const;
         bool operator==(const Card& other) const;
 
-        eCardSuit m_type{};
+        eCardSuit m_suit{};
         card_number_t m_number{};
     };
 }

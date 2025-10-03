@@ -21,7 +21,7 @@ namespace Whist::Logic
 
     bool Hand::HasType(eCardSuit cardSuit) const
     {
-        return std::any_of(std::begin(m_hand), std::end(m_hand), [cardSuit](Card card){ return card.m_type == cardSuit; });
+        return std::any_of(std::begin(m_hand), std::end(m_hand), [cardSuit](Card card){ return card.m_suit == cardSuit; });
     }
 
     uint8_t Hand::CountCards() const
@@ -44,9 +44,9 @@ namespace Whist::Logic
         typePrecedence[eCardSuit::CLUBS] = 1;
         typePrecedence[eCardSuit::DIAMONDS] = 0;
 
-        if (firstCard.m_type != secondCard.m_type)
+        if (firstCard.m_suit != secondCard.m_suit)
         {
-            return typePrecedence[firstCard.m_type] < typePrecedence[secondCard.m_type];
+            return typePrecedence[firstCard.m_suit] < typePrecedence[secondCard.m_suit];
         }
 
         return secondCard.m_number > firstCard.m_number;

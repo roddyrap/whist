@@ -15,7 +15,7 @@ namespace Whist::Terminal
             return L"N/A";
         }
 
-        std::wstring type_symbol = CardSuitToWString(m_type);
+        std::wstring type_symbol = CardSuitToWString(m_suit);
 
         std::wstringstream strStream{};
         strStream << type_symbol;
