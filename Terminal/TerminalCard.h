@@ -7,7 +7,7 @@ namespace Whist::Terminal
 {
     struct TerminalCard : public Logic::Card
     {
-        TerminalCard(Logic::eCardSuit suit, int8_t number) : Card{suit, number}
+        TerminalCard(Logic::eCardSuit suit, card_number_t number) : Card{suit, number}
         {}
 
         TerminalCard(const Card& card) : Card{card}

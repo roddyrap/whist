@@ -9,19 +9,22 @@
 
 namespace Whist::Logic
 {
+    using card_number_t = int8_t;
+
     struct Card
     {
+
         Card() = default;
         virtual ~Card() = default;
 
-        Card(eCardSuit type, int8_t number);
+        Card(eCardSuit type, card_number_t number);
 
         // Compare according to betting precedence.
         int operator<=>(const Card& other) const;
         bool operator==(const Card& other) const;
 
         eCardSuit m_type{};
-        int8_t m_number{};
+        card_number_t m_number{};
     };
 }
 

@@ -107,7 +107,7 @@ namespace Whist::Terminal
         do
         {
             std::wcout << "Enter bet: ";
-        } while (!Terminal::GetNumberInput(betInput) || m_game.PlaceBet(m_playerIndex, {eCardSuit::NO_TYPE, static_cast<int8_t>(betInput)}));
+        } while (!Terminal::GetNumberInput(betInput) || m_game.PlaceBet(m_playerIndex, {eCardSuit::NO_TYPE, static_cast<card_number_t>(betInput)}));
 
         std::wcout << "Turn Done! Return for next turn." << std::endl;
         std::getchar();

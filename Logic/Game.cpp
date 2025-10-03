@@ -10,7 +10,7 @@ namespace Whist::Logic
     {
         // Create card deck.
         std::vector<Card> cardDeck{};
-        for (int8_t cardNumber = 2; cardNumber < 2 + PLAYER_HAND_SIZE; ++cardNumber)
+        for (card_number_t cardNumber = 2; cardNumber < 2 + PLAYER_HAND_SIZE; ++cardNumber)
         {
             cardDeck.emplace_back(eCardSuit::SPADES, cardNumber);
             cardDeck.emplace_back(eCardSuit::HEARTS, cardNumber);

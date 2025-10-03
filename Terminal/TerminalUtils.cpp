@@ -137,7 +137,7 @@ namespace Whist::Terminal
         std::string numberInput = lineInput.substr(0, spaceIndex);
         std::string typeInput = lineInput.substr(spaceIndex + 1);
 
-        int8_t cardNum{};
+        card_number_t cardNum{};
         if (numberInput == "ten" || numberInput == "t")
         {
             cardNum = 10;

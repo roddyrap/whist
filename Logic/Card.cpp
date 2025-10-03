@@ -3,7 +3,7 @@
 
 namespace Whist::Logic
 {
-    Card::Card(eCardSuit type, int8_t number) : m_type{type}, m_number{number}
+    Card::Card(eCardSuit type, card_number_t number) : m_type{type}, m_number{number}
     {}
 
     int Card::operator<=>(const Card& other) const
