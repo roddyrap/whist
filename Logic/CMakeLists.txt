@@ -5,5 +5,5 @@ target_link_libraries(WhistLogic PUBLIC whist_compiler_flags)
 
 # System includes from the source directory are used to access header files.
 target_include_directories(WhistLogic SYSTEM PUBLIC
-                           "${CMAKE_SOURCE_DIR}/"
+                           "${CMAKE_CURRENT_SOURCE_DIR}/../"
                            )
