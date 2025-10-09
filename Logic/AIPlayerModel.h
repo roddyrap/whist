@@ -3,25 +3,19 @@
 
 #include "Hand.h"
 #include "Game.h"
-#include "IPlayer.h"
+#include "IPlayerModel.h"
 
 #include <map>
 
 namespace Whist::Logic
 {
-    class AIPlayer : public IPlayer
+    class AIPlayerModel : public IPlayerModel
     {
     public:
-        AIPlayer(Game& game, uint8_t playerIndex) :
-            m_game{game}, m_hand{game.GetMutableHand(playerIndex)}, m_playerIndex{playerIndex}
-        {}
+        AIPlayerModel(Game& game, uint8_t playerIndex);
 
-        /**
-         * @see IPlayer.h
-        */
-        virtual bool PlaceInitialBet() override;
-        virtual bool PlaceSecondaryBet() override;
-        virtual bool PlaceCard() override;
+    public:
+        Card GetAction();
 
     private:
         /**

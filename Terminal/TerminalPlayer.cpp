@@ -68,6 +68,23 @@ namespace Whist::Terminal
         this->PrintPlayerCards();
     }
 
+    void TerminalPlayer::ReceiveCard(Card newCard)
+    {
+        (void)newCard;
+        return;
+    }
+
+    void TerminalPlayer::ShouldPlayCard()
+    {
+        this->PlaceCard();
+    }
+
+    void TerminalPlayer::ShouldPlaceBet()
+    {
+        if (m_game.GetGameState() == eGameState::INITIAL_BETTING) this->PlaceInitialBet();
+        else this->PlaceSecondaryBet();
+    }
+
     bool TerminalPlayer::PlaceInitialBet()
     {
         // Don't bet again if already skipped.
@@ -81,7 +98,7 @@ namespace Whist::Terminal
 
         Card inputCard{};
         std::wcout << "Enter bet: ";
-        while (!Terminal::GetCardInput(inputCard) || m_game.PlaceBet(m_playerIndex, inputCard) != 0)
+        while (!Terminal::GetCardInput(inputCard) || m_game.PlaceBet(m_playerIndex, inputCard) != Game::ACTION_SUCCESS)
         {
             std::wcout << "Enter bet: ";
         };
@@ -122,7 +139,7 @@ namespace Whist::Terminal
 
         Card inputCard{};
         std::wcout << "Enter Card: ";
-        while (!Terminal::GetCardInput(inputCard) || !m_game.PlaceCard(m_playerIndex, inputCard))
+        while (!Terminal::GetCardInput(inputCard) || m_game.PlaceCard(m_playerIndex, inputCard) != Game::ACTION_SUCCESS)
         {
             std::wcout << "Enter Card: ";
         };

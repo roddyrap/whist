@@ -1,4 +1,4 @@
-#include "AIPlayer.h"
+#include "AIPlayerModel.h"
 #include <map>
 #include <algorithm>
 #include <math.h>
@@ -6,27 +6,80 @@
 
 namespace Whist::Logic
 {
-    constexpr float AIPlayer::Sigmoid(float x)
+    AIPlayerModel::AIPlayerModel(Game& game, uint8_t playerIndex) :
+        m_game{game}, m_hand{game.GetMutableHand(playerIndex)}, m_playerIndex{playerIndex}
+    {}
+
+    Card AIPlayerModel::GetAction()
+    {
+        if (m_game.GetGameState() == eGameState::INITIAL_BETTING)
+        {
+            Card playerPreviousBet = m_game.GetBets()[m_playerIndex];
+            if (playerPreviousBet.m_number != 0 && m_game.IsBetValid(m_playerIndex, playerPreviousBet) == Game::ACTION_SUCCESS) return playerPreviousBet;
+
+            Card highestBet = this->CalculateInitialBet();
+            if (m_game.IsBetValid(m_playerIndex, highestBet) == Game::ACTION_SUCCESS) return highestBet;
+
+            return Card{eCardSuit::SPADES, SKIP_BET};
+        }
+        else if (m_game.GetGameState() == eGameState::SECONDARY_BETTING)
+        {
+            // TODO: Dogshit logic.
+            eCardSuit rulingType{m_game.GetRulingType()};
+            if (rulingType == eCardSuit::NO_TYPE)
+            {
+                rulingType = eCardSuit::SPADES;
+            }
+
+            std::map<eCardSuit, int8_t> countSuits{this->CountSuits()};
+            Card playerBet{rulingType, countSuits[rulingType]};
+
+            if (m_game.IsBetValid(m_playerIndex, playerBet) == Game::BET_WILL_COMPLETE_TO_HAND_SIZE)
+            {
+                playerBet.m_number++;
+            }
+
+            return playerBet;
+        }
+        else if (m_game.GetGameState() == eGameState::ROUNDS)
+        {
+            // TODO: Also dogshit logic.
+            //       For now just place the first valid card.
+            for (const auto& currentCard : m_hand.GetCards())
+            {
+                if (m_game.IsPlayValid(m_playerIndex, currentCard) == Game::ACTION_SUCCESS)
+                {
+                    return currentCard;
+                }
+            }
+        }
+
+        // Should never happen, every player has at least one valid card per round and all states
+        // have been accounted for.
+        return Card{eCardSuit::NO_TYPE, 0};
+    }
+
+    constexpr float AIPlayerModel::Sigmoid(float x)
     {
         return 1.0f / (1.0f + expf(-x));
     }
 
-    constexpr float AIPlayer::RulingCardSigmoid(const Card& card)
+    constexpr float AIPlayerModel::RulingCardSigmoid(const Card& card)
     {
         return (Sigmoid(card.m_number - 11.5f) + 0.1f) / (Sigmoid(2.5f) + 0.1f);
     }
 
-    constexpr float AIPlayer::NonRulingCardSigmoid(const Card& card)
+    constexpr float AIPlayerModel::NonRulingCardSigmoid(const Card& card)
     {
         return Sigmoid(card.m_number - 11.5f) / Sigmoid(3);
     }
 
-    constexpr float AIPlayer::GeneralCardSigmoid(const Card& card)
+    constexpr float AIPlayerModel::GeneralCardSigmoid(const Card& card)
     {
         return Sigmoid(card.m_number - 11.5f);
     }
 
-    Card AIPlayer::CalculateInitialBet() const
+    Card AIPlayerModel::CalculateInitialBet() const
     {
         // Pre-populate the results map with the bets for each suit.
         std::map<eCardSuit, int8_t> results;
@@ -72,72 +125,7 @@ namespace Whist::Logic
         return Card{highest_bet->first, highest_bet->second};
     }
 
-    bool AIPlayer::PlaceInitialBet()
-    {
-        // If already skipping don't bet again.
-        Card previousBet{m_game.GetBets()[m_playerIndex]};
-        if (previousBet.m_number == SKIP_BET)
-        {
-            return true;
-        }
-        // If calculated bet before try to remain on it.
-        else if (previousBet.m_number != 0)
-        {
-            if (m_game.PlaceBet(m_playerIndex, previousBet) != 0)
-            {
-                previousBet.m_number = SKIP_BET;
-                return m_game.PlaceBet(m_playerIndex, previousBet) == 0;
-            }
-        }
-
-        // Calculate and place most optimal bet.
-        Card playerBet{CalculateInitialBet()};
-        if (m_game.PlaceBet(m_playerIndex, playerBet) != 0)
-        {
-            playerBet.m_number = SKIP_BET;
-            return m_game.PlaceBet(m_playerIndex, playerBet) == 0;
-        }
-
-        return true;
-    }
-
-    bool AIPlayer::PlaceSecondaryBet()
-    {
-        eCardSuit rulingType{m_game.GetRulingType()};
-        if (rulingType == eCardSuit::NO_TYPE)
-        {
-            rulingType = eCardSuit::SPADES;
-        }
-
-        std::map<eCardSuit, int8_t> countSuits{this->CountSuits()};
-        Card playerBet{rulingType, countSuits[rulingType]};
-
-        if (m_game.PlaceBet(m_playerIndex, playerBet) != 0)
-        {
-            // Try to bet with +1 so sum will not be 13.
-            playerBet.m_number++;
-            return m_game.PlaceBet(m_playerIndex, playerBet) == 0;
-        }
-
-        return true;
-    }
-
-    bool AIPlayer::PlaceCard()
-    {
-        // For now just place the first valid card.
-        for (const auto& currentCard : m_hand.GetCards())
-        {
-            if (m_game.PlaceCard(m_playerIndex, currentCard))
-            {
-                m_hand.RemoveCard(currentCard);
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    std::map<eCardSuit, int8_t> AIPlayer::CountSuits() const
+    std::map<eCardSuit, int8_t> AIPlayerModel::CountSuits() const
     {
         std::map<eCardSuit, int8_t> cardCounts{};
         for (const auto& currentCard : m_hand.GetCards())

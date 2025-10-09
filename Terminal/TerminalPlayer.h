@@ -20,9 +20,14 @@ namespace Whist::Terminal
         /**
          * @see IPlayer.h
         */
-        virtual bool PlaceInitialBet() override;
-        virtual bool PlaceSecondaryBet() override;
-        virtual bool PlaceCard() override;
+        void ReceiveCard(Logic::Card newCard) override;
+        void ShouldPlayCard() override;
+        void ShouldPlaceBet() override;
+
+
+        bool PlaceInitialBet();
+        bool PlaceSecondaryBet();
+        bool PlaceCard();
 
     private:
         Logic::Game& m_game;
