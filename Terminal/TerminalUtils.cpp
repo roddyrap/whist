@@ -30,25 +30,28 @@ namespace Whist::Terminal
             return L"";
         }
 
-        // Format bets.
-        if (playerBets[0].m_number != SKIP_BET)
+        for (size_t betIndex = 0; betIndex < playerBets.size(); ++betIndex)
         {
-            stringStream << TerminalCard{playerBets[0]};
-        }
-        else
-        {
-            stringStream << "SKIP";
-        }
+            stringStream << ", ";
 
-        for (size_t betIndex = 1; betIndex < playerBets.size(); ++betIndex)
-        {
-            if (playerBets[betIndex].m_number != SKIP_BET)
+            if (whistGame.GetGameState() == eGameState::INITIAL_BETTING && playerBets[betIndex].m_number == 0)
             {
-                stringStream << ", " << TerminalCard{playerBets[betIndex]};
+                stringStream << "N/A";
+            }
+            else if (playerBets[betIndex].m_number != SKIP_BET)
+            {
+                if (betIndex == whistGame.GetRulingPlayer())
+                {
+                    stringStream << TerminalCard{playerBets[betIndex]};
+                }
+                else
+                {
+                    stringStream << playerBets[betIndex].m_number;
+                }
             }
             else
             {
-                stringStream << ", " << "SKIP";
+                stringStream << "SKIP";
             }
         }
 
@@ -117,7 +120,7 @@ namespace Whist::Terminal
         std::transform(lineInput.begin(), lineInput.end(), lineInput.begin(), tolower);
 
         // Help Support!
-        if (lineInput == "?")
+        if (lineInput == "?" || lineInput == "h")
         {
             std::wcout
                 << "First word: Number {2 - 14, a[ce], j[ack], q[ueen], k[ing]}" << std::endl
