@@ -67,8 +67,8 @@ namespace Whist::Logic
         */
         virtual void HandleInvalid();
 
-        const Hand& GetPlayer(uint8_t playerIndex) const;
-        Hand& GetMutablePlayer(uint8_t playerIndex);
+        const Hand& GetHand(uint8_t playerIndex) const;
+        Hand& GetMutableHand(uint8_t playerIndex);
 
         const std::array<Card, NUM_PLAYERS>& GetBets() const;
         const std::array<uint8_t, NUM_PLAYERS>& GetTakes() const;

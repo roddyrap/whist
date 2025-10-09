@@ -13,7 +13,7 @@ namespace Whist::Logic
     {
     public:
         AIPlayer(Game& game, uint8_t playerIndex) :
-            m_game{game}, m_hand{game.GetMutablePlayer(playerIndex)}, m_playerIndex{playerIndex}
+            m_game{game}, m_hand{game.GetMutableHand(playerIndex)}, m_playerIndex{playerIndex}
         {}
 
         /**

@@ -300,12 +300,12 @@ namespace Whist::Logic
         return winningPlayerIndex;
     }
 
-    const Hand& Game::GetPlayer(uint8_t playerIndex) const
+    const Hand& Game::GetHand(uint8_t playerIndex) const
     {
         return m_playerHands.at(playerIndex);
     }
 
-    Hand& Game::GetMutablePlayer(uint8_t playerIndex)
+    Hand& Game::GetMutableHand(uint8_t playerIndex)
     {
         return m_playerHands.at(playerIndex);
     }

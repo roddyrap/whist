@@ -11,7 +11,7 @@ namespace Whist::Terminal
     {
     public:
         TerminalPlayer(Logic::Game& game, uint8_t playerIndex) :
-            m_game{game}, m_hand{game.GetMutablePlayer(playerIndex)}, m_playerIndex{playerIndex}
+            m_game{game}, m_hand{game.GetMutableHand(playerIndex)}, m_playerIndex{playerIndex}
         {}
 
         void PrintPlayerCards();
