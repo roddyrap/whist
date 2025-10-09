@@ -89,10 +89,10 @@ Player 4's hand: ♦6 ♦Q ♣4 ♣7 ♣10 ♣A ♥6 ♥8 ♠5 ♠6 ♠8 ♠10 �
 #### Initial Bets
 
 - Player 1 estimates that they could at best have 4 takes, which is less than 5, so they skip.\
-  Estimation breakdown: Player 1 thinks they are likely to take with their AD, QS or AS. If need be they could also try to take with JC but even that doesn't reach five, so they skip.
+  Estimation breakdown: Player 1 thinks they are likely to take with their AD, ♠Q or ♠A. If need be they could also try to take with ♣J but even that doesn't reach five, so they skip.
 
 - Player 2 estimates that due to their incredible hand their strongest suit is ♥ and they bet 7.\
-  Estimation breakdown: Player 2 has been randomally dealt one of the best hands I have ever seen. If hearts becomes the ruling suit they are guaranteed at least 4 takes (A - J H are the strongest cards in the game) and will probably take with their 5 as it's a ruling card. They can also probably take with their QC or KC so they bet 7.
+  Estimation breakdown: Player 2 has been randomally dealt one of the best hands I have ever seen. If hearts becomes the ruling suit they are guaranteed at least 4 takes (A - J H are the strongest cards in the game) and will probably take with their 5 as it's a ruling card. They can also probably take with their ♣Q or ♣K so they bet 7.
 
 - Player 3 estimates that they could at best have 2 takes, which is less than 5, so they skip.\
   Estimation breakdown: Player 3 doesn't have 5 enough royal cards, so their chances of taking 5 of any suit are minimal.
@@ -105,15 +105,15 @@ Player 3 is the only that bet, so they become the ruling player and ♥ is the g
 #### Secondary Bets
 
 - Player 1 bets 3.\
-  Bet breakdown: Player 1 doesn't have many strong hearts, but they feel confident that their AS QS and AD are strong enough.
+  Bet breakdown: Player 1 doesn't have many strong hearts, but they feel confident that their ♠A ♠Q and ♦A are strong enough.
 
 - Player 2 can't change their bet due to them being the ruling player, so they bet 7.
 
 - Player 3 bets 2.\
-  Bet breakdown: Player 3 thinks they will only take with their kings, KS and KD, so they bet 2. If things come to worst, they have JD so with their strong cards they fill pretty safe.
+  Bet breakdown: Player 3 thinks they will only take with their kings, ♠K and ♦K, so they bet 2. If things come to worst, they have ♦J so with their strong cards they feel pretty safe.
 
 - Player 4 wanted to bet 1 but that's invalid as it would complete the bets to 13 (3 + 7 + 2 + 1 = 13) so they bet 2.\
-  Bet breakdown: Player 4 has a very weak hand. They will probably take with their AC but it's unprobably they will have another take. Unfortunately, they can't bet 1. Considering their options, player 4 decided to bet 2 and not 0 because they figure it will be pretty hard not to take with their ace. Being the last player, this puts player 4 in a pretty poor state.
+  Bet breakdown: Player 4 has a very weak hand. They will probably take with their ♣A but they don't have many options for another take. Unfortunately, they can't bet 1. Considering their options, player 4 decided to bet 2 and not 0 because they figure it will be pretty hard not to take with their ace. Being the last player, this puts player 4 in a pretty poor state.
 
 #### Takes
 
@@ -125,7 +125,7 @@ Player 3 is the only that bet, so they become the ruling player and ♥ is the g
 |            4 |               2 |      ♥     |    ♣2    |     ♥J   |    ♠2    |    ♠5    |       2      | Player 3 also runs out of hearts. |
 |            5 |               2 |      ♥     |    ♠3    |    ♥10   |    ♦5    |    ♦6    |       2      | At this point player 2 notices that all of the other players don't have hearts, meaning ♥5 is also a guarenteed take. |
 |            6 |               2 |      ♥     |    ♣5    |     ♥5   |    ♣8    |    ♠6    |       2      |          |
-|            7 |               2 |      ♥     |    ♣J    |     ♣Q   |    ♣9    |    ♣A    |       4      | At this point player 2 doesn't care as much if they win. They try to bait another player to show their ♣A so they could take with the queen in the next ♣ round. Player 4 sees this oppurtunity and uses the ♥A. |
+|            7 |               2 |      ♥     |    ♣J    |     ♣Q   |    ♣9    |    ♣A    |       4      | At this point player 2 doesn't care as much if they win. They try to bait another player to show their ♣A so they could take with the queen in the next ♣ round. Player 4 sees this oppurtunity and uses the ♣A. |
 |            8 |               4 |      ♠     |    ♠A    |     ♠4   |    ♠9    |    ♠8    |       1      | Player 4 didn't expect the game to favor hearts this much, so they are stuck. They don't have a sure way to take their second bet and they don't have enough cards to bait another player. They throw a round hoping for a better oppurtunity later in the game. |
 |            9 |               1 |      ♦     |    ♦A    |     ♦3   |    ♦8    |    ♦Q    |       1      | Player 1 is still playing strong hoping to get more takes. Player 4 realizes that they will probably not succeed to fulfil their bet. |
 |           10 |               1 |      ♣     |    ♣6    |     ♣K   |   ♦10    |    ♣7    |       2      | Player 1 knows that the ♠K hasn't been played yet, so they throw this round hoping that it will be thrown away later. Player 3 knows that if a diamond round comes they have too many strong diamond cards, so they throw one away. |
