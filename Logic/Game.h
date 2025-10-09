@@ -95,6 +95,12 @@ namespace Whist::Logic
 
         int16_t CalculatePoints(uint8_t playerIndex);
 
+        /**
+         * @param playerIndex The player to check.
+         * @return            Whether a player has bet/played a card in the current round. 
+         */
+        bool HasPlayerPlayed(uint8_t playerIndex) const;
+
     private:
 
         /**

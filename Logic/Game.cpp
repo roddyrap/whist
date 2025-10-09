@@ -226,6 +226,12 @@ namespace Whist::Logic
                m_playerBets[m_rulingPlayer].m_number >= MIN_LEADING_BET;
     }
 
+    bool Game::HasPlayerPlayed(uint8_t playerIndex) const
+    {
+        if (playerIndex > m_playedPlayers.size()) return false;
+        return m_playedPlayers[playerIndex];
+    }
+
     bool Game::IsInvalid()
     {
         uint8_t numSkips{0};
