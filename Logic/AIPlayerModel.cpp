@@ -25,12 +25,7 @@ namespace Whist::Logic
         else if (m_game.GetGameState() == eGameState::SECONDARY_BETTING)
         {
             // TODO: Dogshit logic.
-            eCardSuit rulingType{m_game.GetRulingType()};
-            if (rulingType == eCardSuit::NO_TYPE)
-            {
-                rulingType = eCardSuit::SPADES;
-            }
-
+            eCardSuit rulingType{*m_game.GetRulingSuit()};
             std::map<eCardSuit, int8_t> countSuits{this->CountSuits()};
             Card playerBet{rulingType, countSuits[rulingType]};
 

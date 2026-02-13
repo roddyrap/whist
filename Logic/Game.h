@@ -9,6 +9,7 @@
 #include <vector>
 #include <bitset>
 #include <memory>
+#include <optional>
 
 namespace Whist::Logic
 {
@@ -100,8 +101,8 @@ namespace Whist::Logic
 
         const std::array<Card, NUM_PLAYERS>& GetBets() const;
         const std::array<uint8_t, NUM_PLAYERS>& GetTakes() const;
-        eCardSuit GetRulingType() const;
-        uint8_t GetRulingPlayer() const;
+        std::optional<eCardSuit> GetRulingSuit() const;
+        std::optional<uint8_t> GetRulingPlayer() const;
 
         eGameState GetGameState() const;
         bool IsBetting() const;
@@ -167,8 +168,7 @@ namespace Whist::Logic
         std::array<Card, NUM_PLAYERS> m_playerBets{};
         std::array<uint8_t, NUM_PLAYERS> m_playerTakes{0};
 
-        int8_t m_rulingPlayer{0};
-        eCardSuit m_rulingType{eCardSuit::NO_TYPE};
+        std::optional<uint8_t> m_rulingPlayer{std::nullopt};
 
         std::array<Card, NUM_PLAYERS> m_previousRound{};
         std::array<Card, NUM_PLAYERS> m_currentRound{};

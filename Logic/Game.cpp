@@ -97,31 +97,42 @@ namespace Whist::Logic
 
         // From now the only viable state is initial betting.
 
-        // NOTE: This might be the first bet, in which case the ruling bet is 0 0.
-        Card ruling_bet = m_playerBets[m_rulingPlayer];
-        bool rulingPlayer = playerIndex == m_rulingPlayer || ruling_bet.m_number < 5;
-
         if (playerBet.m_number == SKIP_BET)
         {
             // If there's no active ruling bet then the current player must not be the active ruling bet
             // in which case they are allowed to skip.
-            if (ruling_bet.m_number == 0) return ACTION_SUCCESS;
+            if (!m_rulingPlayer.has_value() || playerIndex != *m_rulingPlayer)
+            {
+                return ACTION_SUCCESS;
+            }
 
             // If there is a ruling bet then that ruling player must not skip.
-            return rulingPlayer? BET_RULING_PLAYER_MUST_NOT_SKIP : ACTION_SUCCESS;
+            return BET_RULING_PLAYER_MUST_NOT_SKIP;
         }
 
         // At this point the player's bet needs to be a valid initial bet.
         if (playerBet.m_number < 5) return BET_INITIAL_TOO_SMALL;
 
-        if (playerBet.m_number < ruling_bet.m_number)
+        if (m_rulingPlayer.has_value())
         {
-            return BET_INITIAL_TOO_SMALL;
-        }
+            Card ruling_bet = m_playerBets[*m_rulingPlayer];
 
-        if (ruling_bet.m_number >= 5 && static_cast<uint8_t>(playerBet.m_suit) < (static_cast<uint8_t>(ruling_bet.m_suit) + !rulingPlayer))
-        {
-            return BET_INITIAL_LOW_PRIORITY_SUIT;
+            if (playerBet.m_number < ruling_bet.m_number)
+            {
+                return BET_INITIAL_TOO_SMALL;
+            }
+
+            if (playerBet.m_number > ruling_bet.m_number)
+            {
+                return ACTION_SUCCESS;
+            }
+
+            if (static_cast<uint8_t>(playerBet.m_suit) <= static_cast<uint8_t>(ruling_bet.m_suit))
+            {
+                return BET_INITIAL_LOW_PRIORITY_SUIT;
+            }
+
+            return ACTION_SUCCESS;
         }
 
         return ACTION_SUCCESS;
@@ -187,11 +198,10 @@ namespace Whist::Logic
                     }
                 }
 
-                m_rulingType = m_playerBets[m_rulingPlayer].m_suit;
-                m_startingPlayerIndex = m_rulingPlayer;
+                m_startingPlayerIndex = *m_rulingPlayer;
 
                 m_playedPlayers.reset();
-                m_playedPlayers[m_rulingPlayer] = true;
+                m_playedPlayers[*m_rulingPlayer] = true;
 
                 m_gameState = eGameState::SECONDARY_BETTING;
             }
@@ -239,9 +249,9 @@ namespace Whist::Logic
             return;
         }
 
-        m_rulingPlayer = 0;
+        m_rulingPlayer = std::nullopt;
         m_startingPlayerIndex = 0;
-        m_rulingType = eCardSuit::NO_TYPE;
+        m_playedPlayers.reset();
 
         m_gameState = eGameState::SECONDARY_BETTING;
     }
@@ -256,12 +266,24 @@ namespace Whist::Logic
         return m_roundNumber;
     }
 
-    eCardSuit Game::GetRulingType() const
+    std::optional<eCardSuit> Game::GetRulingSuit() const
     {
-        return m_rulingType;
+        if (m_rulingPlayer.has_value())
+        {
+            return m_playerBets[*m_rulingPlayer].m_suit;
+        }
+
+        if (this->GetGameState() == eGameState::INITIAL_BETTING)
+        {
+            return std::nullopt;
+        }
+
+        // If the game has been handled after becoming invalid then it's possible to have a ruling
+        // suit without having a ruling player.
+        return eCardSuit::NO_TYPE;
     }
 
-    uint8_t Game::GetRulingPlayer() const
+    std::optional<uint8_t> Game::GetRulingPlayer() const
     {
         return m_rulingPlayer;
     }
@@ -294,8 +316,8 @@ namespace Whist::Logic
         }
 
         return numSkips == NUM_PLAYERS - 1 &&
-               m_rulingPlayer >= 0 &&
-               m_playerBets[m_rulingPlayer].m_number >= MIN_LEADING_BET;
+               m_rulingPlayer.has_value() &&
+               m_playerBets[*m_rulingPlayer].m_number >= MIN_LEADING_BET;
     }
 
     bool Game::IsInvalid()
@@ -369,7 +391,7 @@ namespace Whist::Logic
                     winningPlayerCard = playerCard;
                 }
             }
-            else if (playerCard.m_suit == m_rulingType)
+            else if (playerCard.m_suit == this->GetRulingSuit())
             {
                 winningPlayerIndex = playerIndex;
                 winningPlayerCard = playerCard;

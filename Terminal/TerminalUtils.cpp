@@ -237,7 +237,7 @@ namespace Whist::Terminal
     void PrintEndScreen(Game& whistGame)
     {
         std::wcout << "Game State: " << GameStateToWString(whistGame.GetGameState()) << std::endl;
-        std::wcout << "Ruling Type: " << CardSuitToWString(whistGame.GetRulingType()) << std::endl;
+        std::wcout << "Ruling Type: " << CardSuitToWString(*whistGame.GetRulingSuit()) << std::endl;
         std::wcout << std::endl;
 
         std::array<uint8_t, NUM_PLAYERS> playerTakes{whistGame.GetTakes()};

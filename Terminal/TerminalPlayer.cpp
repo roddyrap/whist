@@ -25,7 +25,7 @@ namespace Whist::Terminal
 
         if (m_game.GetGameState() == eGameState::ROUNDS)
         {
-            std::wcout << "Game Info: " << CardSuitToWString(m_game.GetRulingType()) << std::showpos << m_game.GetBetsSum() - PLAYER_HAND_SIZE << std::noshowpos << std::endl;
+            std::wcout << "Game Info: " << CardSuitToWString(*m_game.GetRulingSuit()) << std::showpos << m_game.GetBetsSum() - PLAYER_HAND_SIZE << std::noshowpos << std::endl;
 
             std::wcout << std::endl;
             Terminal::PrintPlayersStatus(m_game);
