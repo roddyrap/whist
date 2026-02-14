@@ -233,6 +233,8 @@ namespace Whist::Logic
         m_playedPlayers[playerIndex] = true;
         m_currentRound[playerIndex] = cardPlaced;
 
+        m_hands[playerIndex].RemoveCard(cardPlaced);
+
         // End round if all players put a card.
         if (m_playedPlayers.all())
         {
